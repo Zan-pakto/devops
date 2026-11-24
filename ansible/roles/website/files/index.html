@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automated Cloud Infrastructure & DevOps Showcase</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header / Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand">
+        <span class="brand-icon">⚡</span>
+        <span class="brand-title">DevOps Cloud Architecture</span>
+      </div>
+      <div class="status-indicator">
+        <span class="status-dot pulse"></span>
+        <span class="status-text" id="live-status">Infrastructure: ACTIVE & HEALTHY</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="container">
+    <section class="hero-card">
+      <div class="badge-tag">College Practical Capstone Project</div>
+      <h1 class="hero-title">Automated Cloud Infrastructure Provisioning, Configuration Management, Web Server Deployment and Monitoring</h1>
+      <p class="hero-subtitle">
+        An enterprise-grade, end-to-end DevOps automation pipeline implemented with industry-standard tooling:
+        <strong>Terraform</strong> (IaC), <strong>Puppet</strong> (Config Management), <strong>Ansible</strong> (App Orchestration), and <strong>Nagios Core</strong> (Continuous Telemetry).
+      </p>
+
+      <div class="meta-strip">
+        <div class="meta-item">
+          <span class="meta-label">Cloud Platform</span>
+          <span class="meta-val">Amazon Web Services (ap-south-1)</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Target OS</span>
+          <span class="meta-val">Ubuntu 22.04 LTS (Jammy)</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Web Engine</span>
+          <span class="meta-val">Apache / 2.4 (Puppet Managed)</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Local System Time</span>
+          <span class="meta-val" id="clock-display">Loading...</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- DevOps 4-Pillar Pipeline Grid -->
+    <section class="section-title">
+      <h2>The 4 Pillars of the DevOps Pipeline</h2>
+      <p>Every phase is automated, verified, and integrated according to syllabus specifications.</p>
+    </section>
+
+    <div class="pillars-grid">
+      <!-- Pillar 1: Terraform -->
+      <div class="pillar-card terraform">
+        <div class="card-icon">🏗️</div>
+        <div class="card-header">
+          <span class="step-num">Step 01</span>
+          <h3>Terraform</h3>
+        </div>
+        <div class="tech-badge">Infrastructure as Code</div>
+        <p class="card-desc">
+          Provisions complete AWS isolated VPC (10.0.0.0/16), public subnet (10.0.1.0/24), Internet Gateway, strict Security Groups, and dual Ubuntu EC2 instances.
+        </p>
+        <ul class="feature-list">
+          <li>Deterministic resource declarations</li>
+          <li>Least-privilege security group rules</li>
+          <li>Auto-generated output variables & SSH keypairs</li>
+        </ul>
+        <div class="card-footer">
+          <span class="status-pill verified">✓ Provisioned</span>
+        </div>
+      </div>
+
+      <!-- Pillar 2: Puppet -->
+      <div class="pillar-card puppet">
+        <div class="card-icon">🎭</div>
+        <div class="card-header">
+          <span class="step-num">Step 02</span>
+          <h3>Puppet</h3>
+        </div>
+        <div class="tech-badge">Configuration Management</div>
+        <p class="card-desc">
+          Enforces desired system state on the target node. Manages Apache2 web server installation, service persistence, directory structures, and system configurations.
+        </p>
+        <ul class="feature-list">
+          <li>Master-Agent PKI certificate exchange</li>
+          <li>Declarative manifest (<code>site.pp</code>) enforcement</li>
+          <li>Self-healing drift correction</li>
+        </ul>
+        <div class="card-footer">
+          <span class="status-pill verified">✓ State Enforced</span>
+        </div>
+      </div>
+
+      <!-- Pillar 3: Ansible -->
+      <div class="pillar-card ansible">
+        <div class="card-icon">🚀</div>
+        <div class="card-header">
+          <span class="step-num">Step 03</span>
+          <h3>Ansible</h3>
+        </div>
+        <div class="tech-badge">Application Orchestration</div>
+        <p class="card-desc">
+          Deploys this responsive HTML/CSS/JS application payload to <code>/var/www/html/</code>, sets Linux ownership/permissions (<code>www-data</code>), and verifies HTTP 200 health.
+        </p>
+        <ul class="feature-list">
+          <li>Agentless, idempotent SSH execution</li>
+          <li>YAML role & playbook-driven workflows</li>
+          <li>Automated post-deploy smoke testing</li>
+        </ul>
+        <div class="card-footer">
+          <span class="status-pill verified">✓ Deployed</span>
+        </div>
+      </div>
+
+      <!-- Pillar 4: Nagios -->
+      <div class="pillar-card nagios">
+        <div class="card-icon">📡</div>
+        <div class="card-header">
+          <span class="step-num">Step 04</span>
+          <h3>Nagios Core</h3>
+        </div>
+        <div class="tech-badge">Continuous Monitoring</div>
+        <p class="card-desc">
+          Continuously monitors target host availability and HTTP service health. Alerts on latency spikes, downtime, packet loss, or service interruptions.
+        </p>
+        <ul class="feature-list">
+          <li>ICMP host-alive ping checks (RTT & loss)</li>
+          <li>Active HTTP 200 response verification</li>
+          <li>Web-based NOC dashboard at <code>/nagios</code></li>
+        </ul>
+        <div class="card-footer">
+          <span class="status-pill verified">✓ Monitored</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Nodes & Architecture Topology Section -->
+    <section class="section-title">
+      <h2>Cluster Topology & Node Telemetry</h2>
+      <p>Secure dual-node AWS architecture connected within a private subnet.</p>
+    </section>
+
+    <div class="nodes-grid">
+      <div class="node-card">
+        <div class="node-header">
+          <span class="node-role">Control Plane Node</span>
+          <span class="node-state-badge">RUNNING</span>
+        </div>
+        <h4 class="node-name">puppet-mgmt.devops.lab</h4>
+        <div class="node-details">
+          <div class="detail-row">
+            <span class="key">Role:</span>
+            <span class="val">Puppet Master, Ansible Controller, Nagios Core</span>
+          </div>
+          <div class="detail-row">
+            <span class="key">Private IP:</span>
+            <span class="val"><code>10.0.1.10</code></span>
+          </div>
+          <div class="detail-row">
+            <span class="key">Services:</span>
+            <span class="val">puppetserver (8140), nagios, apache2</span>
+          </div>
+          <div class="detail-row">
+            <span class="key">Security:</span>
+            <span class="val">Admin IP restricted (port 22, 80)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="node-card target-node">
+        <div class="node-header">
+          <span class="node-role">Target Web Server Node</span>
+          <span class="node-state-badge serving">SERVING TRAFFIC</span>
+        </div>
+        <h4 class="node-name">web-target.devops.lab</h4>
+        <div class="node-details">
+          <div class="detail-row">
+            <span class="key">Role:</span>
+            <span class="val">Puppet Agent, Apache Web Host, Nagios Target</span>
+          </div>
+          <div class="detail-row">
+            <span class="key">Private IP:</span>
+            <span class="val"><code>10.0.1.20</code></span>
+          </div>
+          <div class="detail-row">
+            <span class="key">Services:</span>
+            <span class="val">apache2 (80), puppet-agent</span>
+          </div>
+          <div class="detail-row">
+            <span class="key">HTTP Status:</span>
+            <span class="val" id="target-health">200 OK (Serving this page)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Verification & Commands Interactive Showcase -->
+    <section class="code-showcase-section">
+      <div class="terminal-header">
+        <span class="terminal-dot red"></span>
+        <span class="terminal-dot yellow"></span>
+        <span class="terminal-dot green"></span>
+        <span class="terminal-title">DevOps Automated Verification Console</span>
+      </div>
+      <div class="terminal-body">
+        <p class="comment"># 1. Puppet state enforcement run on target:</p>
+        <p class="command">$ sudo puppet agent --test</p>
+        <p class="output">Info: Using environment 'production'</p>
+        <p class="output">Info: Applying configuration version '1732274800'</p>
+        <p class="output">Notice: Applying Apache Web Configuration via Puppet</p>
+        <p class="output">Notice: Applied catalog in 1.42 seconds</p>
+        
+        <p class="comment mt"># 2. Ansible website deployment run:</p>
+        <p class="command">$ ansible-playbook -i inventory.ini playbook.yml</p>
+        <p class="output">PLAY [Deploy Professional DevOps College Project Website] ********************</p>
+        <p class="output">TASK [Assert Apache2 package is present] .......................... [OK]</p>
+        <p class="output">TASK [Deploy responsive website files] ............................ [CHANGED]</p>
+        <p class="output">TASK [Test local HTTP response code] .............................. [OK (200)]</p>
+        <p class="output success">PLAY RECAP: web-target.devops.lab : ok=6 changed=2 unreachable=0 failed=0</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Automated DevOps Engineering Project &bull; Built with Terraform, Puppet, Ansible & Nagios</p>
+      <p class="copyright">&copy; Academic Year 2026-2027 &bull; Cloud Infrastructure & Automation Lab</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

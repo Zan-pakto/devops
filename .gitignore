@@ -1,0 +1,38 @@
+# Ignore private keys and certificates
+keys/
+*.pem
+*.pub
+*.key
+*.crt
+credentials
+*.credentials
+
+# Ignore Terraform local state and secrets
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+terraform.tfstate
+terraform.tfstate.backup
+*.tfplan
+tfplan
+terraform.tfvars
+crash.log
+
+# Ignore runtime databases and logs
+*.db
+*.sqlite
+*.sqlite3
+*.log
+
+# Ignore Ansible temporary execution files
+*.retry
+.ansible/
+
+# Ignore OS & editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.bak
+.vscode/
+.idea/

@@ -1,0 +1,21 @@
+---
+# Role task definition for website deployment
+- name: Ensure document root directory exists
+  ansible.builtin.file:
+    path: /var/www/html
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+
+- name: Deploy website assets
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/var/www/html/{{ item }}"
+    owner: www-data
+    group: www-data
+    mode: '0644'
+  loop:
+    - index.html
+    - style.css
+    - script.js

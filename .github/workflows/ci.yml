@@ -1,0 +1,33 @@
+name: DevOps Pipeline Validation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate-infrastructure:
+    name: Validate Terraform & Manifests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.0
+
+      - name: Check Terraform Formatting
+        run: |
+          cd terraform
+          terraform fmt -check
+
+      - name: Validate PHP Application Syntax
+        run: |
+          for file in website/*.php; do
+            if [ -f "$file" ]; then
+              php -l "$file"
+            fi
+          done

@@ -1,0 +1,93 @@
+---
+- name: Deploy Real-World Student Complaint Management System (CampusVoice)
+  hosts: webservers
+  become: true
+  vars:
+    doc_root: "/var/www/html"
+    data_dir: "/var/www/html/data"
+
+  tasks:
+    - name: Verify Apache2 package is installed (managed by Puppet)
+      ansible.builtin.package_facts:
+        manager: auto
+
+    - name: Assert Apache2 package presence
+      ansible.builtin.assert:
+        that:
+          - "'apache2' in ansible_facts.packages"
+        fail_msg: "Apache2 is not installed! Run Puppet manifest first."
+
+    - name: Ensure Apache2 service is active
+      ansible.builtin.service:
+        name: apache2
+        state: started
+        enabled: true
+
+    - name: Ensure application data directory exists with write permissions
+      ansible.builtin.file:
+        path: "{{ data_dir }}"
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: '0775'
+
+    - name: Remove stale default files if present
+      ansible.builtin.file:
+        path: "{{ doc_root }}/index.html"
+        state: absent
+
+    - name: Deploy Student Complaint Management System source files
+      ansible.builtin.copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        owner: www-data
+        group: www-data
+        mode: '0644'
+      loop:
+        - { src: "../website/index.php", dest: "{{ doc_root }}/index.php" }
+        - { src: "../website/track.php", dest: "{{ doc_root }}/track.php" }
+        - { src: "../website/admin.php", dest: "{{ doc_root }}/admin.php" }
+        - { src: "../website/api.php", dest: "{{ doc_root }}/api.php" }
+        - { src: "../website/db.php", dest: "{{ doc_root }}/db.php" }
+        - { src: "../website/health.php", dest: "{{ doc_root }}/health.php" }
+        - { src: "../website/style.css", dest: "{{ doc_root }}/style.css" }
+        - { src: "../website/script.js", dest: "{{ doc_root }}/script.js" }
+
+    - name: Initialize SQLite database and seed initial records
+      ansible.builtin.command:
+        cmd: "php {{ doc_root }}/db.php"
+      args:
+        creates: "{{ data_dir }}/complaints.db"
+
+    - name: Ensure SQLite database file permissions for web server
+      ansible.builtin.file:
+        path: "{{ data_dir }}/complaints.db"
+        owner: www-data
+        group: www-data
+        mode: '0664'
+      ignore_errors: true
+
+    - name: Query health endpoint via local HTTP GET
+      ansible.builtin.uri:
+        url: "http://localhost/health.php"
+        return_content: yes
+        status_code: 200
+      register: health_response
+
+    - name: Assert application and database health
+      ansible.builtin.assert:
+        that:
+          - "health_response.json.status == 'OK'"
+          - "health_response.json.database == 'CONNECTED'"
+        fail_msg: "Application health check failed: {{ health_response.content }}"
+        success_msg: "Application is HEALTHY and Database is CONNECTED!"
+
+    - name: Display deployment telemetry summary
+      ansible.builtin.debug:
+        msg:
+          - "Application: CampusVoice Student Complaint Management System"
+          - "Status: {{ health_response.json.status }}"
+          - "Database: {{ health_response.json.database }} (SQLite3)"
+          - "Total Grievances: {{ health_response.json.metrics.total_complaints }}"
+          - "Runtime: Apache/2.4 + PHP {{ health_response.json.php_version }}"
+          - "Managed by: Puppet & Ansible"
